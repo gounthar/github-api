@@ -419,4 +419,18 @@ public class GitHubTest extends AbstractGitHubWireMockTest {
             assertThat(e.getClass().getName(), equalToIgnoringCase(ServiceDownException.class.getName()));
         }
     }
+
+    /**
+     * Test forking a repository with only the default branch.
+     *
+     * @throws IOException
+     *             if an I/O error occurs
+     */
+    @Test
+    public void testForkRepository() throws IOException {
+        GHRepository forkedRepo = gitHub.forkRepository("hub4j", "github-api");
+        assertThat(forkedRepo, notNullValue());
+        assertThat(forkedRepo.getDefaultBranch(), equalTo("main"));
+        assertThat(forkedRepo.getBranches().size(), equalTo(1));
+    }
 }

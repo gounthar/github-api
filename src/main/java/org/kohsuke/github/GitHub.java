@@ -1333,4 +1333,22 @@ public class GitHub {
     }
 
     private static final Logger LOGGER = Logger.getLogger(GitHub.class.getName());
+
+    /**
+     * Forks a repository to the authenticated user's account, retrieving only the default branch.
+     *
+     * @param owner
+     *            the owner of the repository to fork
+     * @param repo
+     *            the name of the repository to fork
+     * @return the newly forked repository
+     * @throws IOException
+     *             if an I/O error occurs
+     */
+    public GHRepository forkRepository(String owner, String repo) throws IOException {
+        return createRequest().method("POST")
+                .with("default_branch_only", true)
+                .withUrlPath("/repos/" + owner + "/" + repo + "/forks")
+                .fetch(GHRepository.class);
+    }
 }
