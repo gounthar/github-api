@@ -7,3 +7,13 @@
 
 
 See https://github-api.kohsuke.org/ for more details
+
+## Forking a Repository
+
+To fork a repository and retrieve only the default branch, you can use the `forkRepository` method in the `GitHub` class. Here's an example:
+
+```java
+GitHub github = new GitHubBuilder().withOAuthToken("YOUR_OAUTH_TOKEN").build();
+GHRepository forkedRepo = github.forkRepository("owner", "repository");
+System.out.println("Forked repository: " + forkedRepo.getFullName());
+```
